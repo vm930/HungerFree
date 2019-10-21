@@ -1,47 +1,24 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
-import PantryScreen from "../screens/PantryScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import PlaceDetails from "../screens/PlaceDetails";
 
-import CustomHeader from "../components/CustomHeader";
+import TabBarIcon from '../components/TabBarIcon';
+import HomeScreen from '../screens/HomeScreen';
+import PantryScreen from '../screens/PantryScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import PlaceDetails from '../screens/PlaceDetails';
 
 import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
-let headerDefaultConfig = {
-  header: props => <CustomHeader {...props} />,
-  headerStyle: {
-    backgroundColor: "transparent"
-  }
-};
-
 const HomeStack = createStackNavigator({
-
-  Home: HomeScreen,
-  PlaceDetails: {
-    screen: PlaceDetails,
-    navigationOptions: {
-      header: null
-    }
-  }
+	Home: HomeScreen,
+	PlaceDetails: PlaceDetails
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: "Home",
-  tabBarIcon: ({ focused }) => (
-    <FontAwesome5
-      style={{ marginBottom: -3 }}
-      size={26}
-      focused={focused}
-      name={"home"}
-      color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
-    />
-  )
-
+	tabBarLabel: 'Home',
+	tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={'ios-home'} />
 };
 
 const PantryStack = createStackNavigator({
@@ -78,42 +55,10 @@ ProfileStack.navigationOptions = {
 	)
 };
 
-const tabNav = createBottomTabNavigator(
-  {
-    HomeStack,
-    PantryStack,
-    ProfileStack
-  },
-  {
-    initialRouteName: "HomeStack",
-    navigationOptions: {
-      ...headerDefaultConfig
-    },
-    tabBarPosition: "bottom",
-    initialRouteName: "HomeStack",
-    tabBarOptions: {
-      activeTintColor: "white",
-      inactiveTintColor: "#ccc",
-      labelStyle: {
-        fontWeight: "bold"
-      },
-
-      style: {
-        backgroundColor: "#Ff9292",
-        borderTopColor: "transparent"
-      }
-    }
-  }
-);
-
-const tabNavigator = createStackNavigator(
-  {
-    tabNav
-  },
-  {
-    headerLayoutPreset: "center",
-    headerMode: "float"
-  }
-
+const tabNavigator = createBottomTabNavigator({
+	HomeStack,
+	PantryStack,
+	ProfileStack
+});
 
 export default tabNavigator;
