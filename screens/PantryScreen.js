@@ -3,7 +3,8 @@ import { Text, View, StyleSheet } from "react-native";
 
 export class PantryScreen extends Component {
   static navigationOptions = {
-    header: null
+    title: "Pantries"
+    //header: null
   };
 
   render() {
